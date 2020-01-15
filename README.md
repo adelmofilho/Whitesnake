@@ -9,24 +9,14 @@ Repositório pessoal de dockerfiles.
 
 ## Imagens disponibilizadas
 
-
+Para acesso a todas as tags e log das builds acesse o [Dockerhub](https://hub.docker.com/u/adelmofilho) do projeto.
 
 | Imagem  | Descrição                                 | Status                                                                               | Build Status                                                                             | Métricas                                                                       |
 |---------|-------------------------------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| r-base  | R versionado com versionamento de pacotes | ![Build Status](https://img.shields.io/docker/cloud/build/adelmofilho/r-base) | ![Build Status](https://img.shields.io/docker/cloud/automated/adelmofilho/r-base) | ![Build Status](https://img.shields.io/docker/pulls/adelmofilho/r-base) |
-| rstudio | Adiciona R-Studio                         | ![Build Status](https://img.shields.io/docker/cloud/build/adelmofilho/rstudio) | ![Build Status](https://img.shields.io/docker/cloud/automated/adelmofilho/rstudio) | ![Build Status](https://img.shields.io/docker/pulls/adelmofilho/rstudio)
+| r-base  | R versionado com versionamento de pacotes | ![Build Status](https://img.shields.io/docker/cloud/build/adelmofilho/r-base)        | ![Build Status](https://img.shields.io/docker/cloud/automated/adelmofilho/r-base)        | ![Build Status](https://img.shields.io/docker/pulls/adelmofilho/r-base)        | 
+| rstudio | Adiciona R-Studio                         | ![Build Status](https://img.shields.io/docker/cloud/build/adelmofilho/rstudio)       | ![Build Status](https://img.shields.io/docker/cloud/automated/adelmofilho/rstudio)       | ![Build Status](https://img.shields.io/docker/pulls/adelmofilho/rstudio)       |
 
-
-
-
-
-
-
-
-
-
-
-
+<br>
 
 ## Licença
 
