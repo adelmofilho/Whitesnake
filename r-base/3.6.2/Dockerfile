@@ -10,10 +10,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Instalar dependências
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils \
-    gdebi-core \
-    gfortran \
-    git \
+    apt-utils=1.6.12 \
+    gfortran=4:7.4.0-1ubuntu2.3 \
+    git=1:2.17.1-1ubuntu0.5 \
+    g++=4:7.4.0-1ubuntu2.3 \
     libreadline6-dev \
     libx11-dev \
     libxt-dev \
@@ -29,14 +29,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libzstd-dev \
     liblzma-dev \
     libcurl4-openssl-dev \
-    locales \
-    openjdk-8-jdk \
-    screen \
-    texinfo \
-    texlive \
-    texlive-fonts-extra \
-    wget \
-    xvfb \
+    locales=2.27-3ubuntu1 \
+    openjdk-8-jdk=8u232-b09-0ubuntu1~18.04.1 \
+    screen=4.6.2-1ubuntu1 \
+    texinfo=6.5.0.dfsg.1-2 \
+    texlive=2017.20180305-1 \
+    texlive-fonts-extra=2017.20180305-2 \
+    vim=2:8.0.1453-1ubuntu1.1 \
+    wget=1.19.4-1ubuntu2.2 \
+    xvfb=2:1.19.6-1ubuntu4.3 \
 && rm -rf /var/lib/apt/lists/*
 
 # Ajuste o locale
@@ -46,16 +47,16 @@ ENV LANGUAGE pt_BR.UTF-8
 ENV LC_ALL pt_BR.UTF-8
 
 # Instalar R
-WORKDIR /generics
 
 RUN wget https://cran.rstudio.com/src/base/R-3/R-3.6.2.tar.gz && \
     tar zxvf R-3.6.2.tar.gz && \
-    rm R-3.6.2.tar.gz && \
-    cd R-3.6.2 && \ 
-    ./configure --with-cairo --with-jpeglib --enable-R-shlib --with-blas --with-lapack && \ 
+    rm R-3.6.2.tar.gz
+
+WORKDIR /R-3.6.2
+
+RUN ./configure --with-cairo --with-jpeglib --enable-R-shlib --with-blas --with-lapack && \ 
     make && \
-    make install && \
-    rm -rf R-3.6.2
+    make install
 
 # Instalar renv
 ENV RENV_VERSION 0.9.2-20

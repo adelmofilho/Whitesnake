@@ -3,11 +3,11 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b3791d03b8354eb58e052b0db9862167)](https://www.codacy.com/manual/adelmofilho/Whitesnake?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adelmofilho/Whitesnake&amp;utm_campaign=Badge_Grade)
 
+<br>
+
 ## Descrição
 
-Repositório pessoal de Dockerfiles.
-
-Para utilizar imagens oficiais RStudio®, acesse o projeto [Rocker](https://www.rocker-project.org/).
+Repositório pessoal de Dockerfiles para estudo e uso em projetos.
 
 <br>
 
