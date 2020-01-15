@@ -2,15 +2,14 @@
 
 Repositório pessoal de dockerfiles.
 
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b3791d03b8354eb58e052b0db9862167)](https://www.codacy.com/manual/adelmofilho/Whitesnake?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adelmofilho/Whitesnake&amp;utm_campaign=Badge_Grade)
 
-[![Project Licence](https://img.shields.io/github/license/adelmofilho/Whitesnake)](http://www.repostatus.org/#active)
-
-
-## Primeiros Passos
-
+<br>
 
 ## Imagens disponibilizadas
+
+
 
 | Imagem  | Descrição                                 | Status                                                                               | Build Status                                                                             | Métricas                                                                       |
 |---------|-------------------------------------------|--------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
