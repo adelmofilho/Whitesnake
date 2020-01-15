@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++=4:7.4.0-1ubuntu2.3 \
     libreadline-dev=7.0-3 \
     libx11-dev=2:1.6.4-3ubuntu0.2 \
-    libxt-dev=7.0-3 \
+    libxt-dev=1:1.1.5-1 \
     libpng-dev=1.6.34-1ubuntu0.18.04.2 \
     libjpeg-dev=8c-2ubuntu8 \
     libcairo2-dev=1.15.10-2ubuntu0.1 \   
