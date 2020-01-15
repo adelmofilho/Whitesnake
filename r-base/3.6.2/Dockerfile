@@ -9,7 +9,7 @@ LABEL org.label-schema.license="GPL-3.0" \
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Instalar dependências
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
     gdebi-core \
     gfortran \
