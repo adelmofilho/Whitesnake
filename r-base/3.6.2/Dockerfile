@@ -46,6 +46,8 @@ ENV LANGUAGE pt_BR.UTF-8
 ENV LC_ALL pt_BR.UTF-8
 
 # Instalar R
+WORKDIR /generics
+
 RUN wget https://cran.rstudio.com/src/base/R-3/R-3.6.2.tar.gz && \
     tar zxvf R-3.6.2.tar.gz && \
     rm R-3.6.2.tar.gz && \

@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libedit2=3.1-20170329-1 \
     libclang-dev=1:6.0-41~exp5~ubuntu1 \
     psmisc=23.1-1ubuntu0.1 \
+    sudo=1.8.21p2-3ubuntu1.1 \
 && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.2.5033-amd64.deb
