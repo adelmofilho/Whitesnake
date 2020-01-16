@@ -34,8 +34,9 @@ RUN wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.2.50
 RUN gdebi -n rstudio-server-1.2.5033-amd64.deb
 
 # Seta configurações adicionais (adaptado do projeto Rocker)
-RUN mkdir -p /etc/R \
-  && echo 'if(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { options(httr_oob_default = TRUE) }' >> /usr/local/lib/R/etc/Rprofile.site \
+WORKDIR /etc/R
+
+RUN  echo 'if(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { options(httr_oob_default = TRUE) }' >> /usr/local/lib/R/etc/Rprofile.site \
   && echo "PATH=${PATH}" >> /usr/local/lib/R/etc/Renviron \
   && echo 'rsession-which-r=/usr/local/bin/R' >> /etc/rstudio/rserver.conf \
   && echo 'lock-type=advisory' >> /etc/rstudio/file-locks
