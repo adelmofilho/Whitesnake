@@ -45,19 +45,19 @@ RUN git config --system credential.helper 'cache --timeout=3600' \
  && wget -P /tmp/ https://github.com/just-containers/s6-overlay/releases/download/v1.21.7.0/s6-overlay-amd64.tar.gz \
  && tar xzf /tmp/s6-overlay-amd64.tar.gz -C / \
  && mkdir -p /etc/services.d/rstudio \
- && printf "#!/usr/bin/with-contenv bash \
-           \n## load /etc/environment vars first: \
-  		   \n for line in $( cat /etc/environment ) ; do export $line ; done \
-           \n exec /usr/lib/rstudio-server/bin/rserver --server-daemonize 0" \
-           > /etc/services.d/rstudio/run \
- && printf "#!/bin/bash \
-           \n rstudio-server stop" \
-           > /etc/services.d/rstudio/finish \
+ && echo "#!/usr/bin/with-contenv bash \
+          \n## load /etc/environment vars first: \
+  		  \n for line in $( cat /etc/environment ) ; do export $line ; done \
+          \n exec /usr/lib/rstudio-server/bin/rserver --server-daemonize 0" \
+          > /etc/services.d/rstudio/run \
+ && echo "#!/bin/bash \
+          \n rstudio-server stop" \
+          > /etc/services.d/rstudio/finish \
  && mkdir -p /home/rstudio/.rstudio/monitored/user-settings \
- && printf "alwaysSaveHistory='0' \
-           \nloadRData='0' \
-           \nsaveAction='0'" \
-           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
+ && echo "alwaysSaveHistory='0' \
+          \nloadRData='0' \
+          \nsaveAction='0'" \
+          > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
  && chown -R rstudio:rstudio /home/rstudio/.rstudio
 
 CMD ["/init"]
