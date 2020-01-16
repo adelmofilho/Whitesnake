@@ -48,16 +48,16 @@ RUN git config --system credential.helper 'cache --timeout=3600' \
   && tar xzf /tmp/s6-overlay-amd64.tar.gz -C / \
   && mkdir -p /etc/services.d/rstudio 
 
-RUN echo '#!/usr/bin/with-contenv bash \
+RUN echo -e '#!/usr/bin/with-contenv bash \
           \n## load /etc/environment vars first: \
   		  \n for line in $( cat /etc/environment ) ; do export $line ; done \
           \n exec /usr/lib/rstudio-server/bin/rserver --server-daemonize 0' \
           > /etc/services.d/rstudio/run \
-  && echo '#!/bin/bash \
+  && echo -e '#!/bin/bash \
           \n rstudio-server stop' \
           > /etc/services.d/rstudio/finish \
   && mkdir -p /home/rstudio/.rstudio/monitored/user-settings \
-  && echo 'alwaysSaveHistory="0" \
+  && echo -e 'alwaysSaveHistory="0" \
           \nloadRData="0" \
           \nsaveAction="0"' \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
