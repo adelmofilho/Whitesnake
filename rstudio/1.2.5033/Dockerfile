@@ -50,7 +50,7 @@ RUN git config --system credential.helper 'cache --timeout=3600' \
 
 RUN echo -e "#!/usr/bin/with-contenv bash \
           \n## load /etc/environment vars first: \
-  		  \n for line in $( cat /etc/environment ) ; do export $line ; done \
+  		  \n for line in $( cat /etc/environment ) ; do ; done \
           \n exec /usr/lib/rstudio-server/bin/rserver --server-daemonize 0" \
           > /etc/services.d/rstudio/run
 
