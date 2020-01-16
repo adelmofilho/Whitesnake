@@ -52,12 +52,14 @@ RUN echo -e "#!/usr/bin/with-contenv bash \
           \n## load /etc/environment vars first: \
   		  \n for line in $( cat /etc/environment ) ; do export $line ; done \
           \n exec /usr/lib/rstudio-server/bin/rserver --server-daemonize 0" \
-          > /etc/services.d/rstudio/run \
-  && echo -e "#!/bin/bash \
+          > /etc/services.d/rstudio/run
+
+RUN echo -e "#!/bin/bash \
           \n rstudio-server stop" \
           > /etc/services.d/rstudio/finish \
-  && mkdir -p /home/rstudio/.rstudio/monitored/user-settings \
-  && echo -e "alwaysSaveHistory='0' \
+  && mkdir -p /home/rstudio/.rstudio/monitored/user-settings
+
+RUN echo -e "alwaysSaveHistory='0' \
           \nloadRData='0' \
           \nsaveAction='0'" \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
