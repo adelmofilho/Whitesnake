@@ -22,6 +22,13 @@ Para acesso a todas as tags e log das builds acesse o [Dockerhub](https://hub.do
 
 <br>
 
+## Uso
+
+rstudio
+```
+docker run -d --rm -p 8787:8787 adelmofilho/rstudio:1.2.5033 -e USER=<usuário> -e PASSWORD=<senha>
+```
+
 ## Licença
 
 Os Dockerfiles neste repositório estão sob licença GPL 3.
