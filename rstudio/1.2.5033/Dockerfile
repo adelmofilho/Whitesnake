@@ -8,6 +8,15 @@ LABEL org.label-schema.license="GPL-3.0" \
 # Assumir defaults nas instalações 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Criação do usuário para rstudio-server
+ENV USER rstudio
+ENV PASSWORD rstudio
+
+RUN useradd rstudio \
+  && echo "${USER}:${PASSWORD}" | chpasswd \
+  && mkdir /home/${USER} \
+  && chown ${USER}:${USER} /home/${USER}
+
 # Instalar dependências
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gdebi-core=0.9.5.7+nmu2 \ 
@@ -19,34 +28,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo=1.8.21p2-3ubuntu1.1 \
 && rm -rf /var/lib/apt/lists/*
 
+# Instala RStudio-Server
 RUN wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.2.5033-amd64.deb
 
 RUN gdebi -n rstudio-server-1.2.5033-amd64.deb
 
+# Seta configurações adicionais (adaptado do projeto Rocker)
 RUN mkdir -p /etc/R \
-  ## Write config files in $R_HOME/etc
-  && echo '\n\
-    \n# Configure httr to perform out-of-band authentication if HTTR_LOCALHOST \
-    \n# is not set since a redirect to localhost may not work depending upon \
-    \n# where this Docker container is running. \
-    \nif(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { \
-    \n  options(httr_oob_default = TRUE) \
-    \n}' >> /usr/local/lib/R/etc/Rprofile.site \
+  && echo 'if(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { options(httr_oob_default = TRUE) }' >> /usr/local/lib/R/etc/Rprofile.site \
   && echo "PATH=${PATH}" >> /usr/local/lib/R/etc/Renviron \
-  ## Need to configure non-root user for RStudio
-  && useradd rstudio \
-  && echo "rstudio:rstudio" | chpasswd \
-	&& mkdir /home/rstudio \
-	&& chown rstudio:rstudio /home/rstudio \
-	&& addgroup rstudio staff \
-  ## Prevent rstudio from deciding to use /usr/bin/R if a user apt-get installs a package
-  &&  echo 'rsession-which-r=/usr/local/bin/R' >> /etc/rstudio/rserver.conf \
-  ## use more robust file locking to avoid errors when using shared volumes:
-  && echo 'lock-type=advisory' >> /etc/rstudio/file-locks \
-  ## configure git not to request password each time
-  && git config --system credential.helper 'cache --timeout=3600' \
+  && echo 'rsession-which-r=/usr/local/bin/R' >> /etc/rstudio/rserver.conf \
+  && echo 'lock-type=advisory' >> /etc/rstudio/file-locks
+
+# Configura sistema s6 para inicialização do rstudio-server com o container (adaptado do projeto Rocker)
+RUN git config --system credential.helper 'cache --timeout=3600' \
   && git config --system push.default simple \
-  ## Set up S6 init system
   && wget -P /tmp/ https://github.com/just-containers/s6-overlay/releases/download/v1.21.7.0/s6-overlay-amd64.tar.gz \
   && tar xzf /tmp/s6-overlay-amd64.tar.gz -C / \
   && mkdir -p /etc/services.d/rstudio \
@@ -64,10 +60,5 @@ RUN mkdir -p /etc/R \
           \nsaveAction="0"' \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
   && chown -R rstudio:rstudio /home/rstudio/.rstudio
-
-ENV USER rstudio
-ENV PASSWORD rstudio
-
-RUN echo "$USER:$PASSWORD" | chpasswd
 
 CMD ["/init"]
