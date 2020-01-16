@@ -13,9 +13,9 @@ ENV USER rstudio
 ENV PASSWORD rstudio
 
 RUN useradd rstudio \
- && echo "${USER}:${PASSWORD}" | chpasswd \
- && mkdir /home/${USER} \
- && chown ${USER}:${USER} /home/${USER}
+  && echo "${USER}:${PASSWORD}" | chpasswd \
+  && mkdir /home/${USER} \
+  && chown ${USER}:${USER} /home/${USER}
 
 # Instalar dependências
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -26,43 +26,38 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libclang-dev=1:6.0-41~exp5~ubuntu1 \
     psmisc=23.1-1ubuntu0.1 \
     sudo=1.8.21p2-3ubuntu1.1 \
- && rm -rf /var/lib/apt/lists/*
+&& rm -rf /var/lib/apt/lists/*
 
-# Instala RStudio-Server
+# Instala rstudio-server
 RUN wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.2.5033-amd64.deb
 
 RUN gdebi -n rstudio-server-1.2.5033-amd64.deb
 
-# Seta configurações (adaptado do projeto Rocker)
-WORKDIR /etc/R
+RUN mkdir -p /etc/R \
+  && echo 'if(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { options(httr_oob_default = TRUE) }' >> /usr/local/lib/R/etc/Rprofile.site \
+  && echo "PATH=${PATH}" >> /usr/local/lib/R/etc/Renviron \
+  && echo 'rsession-which-r=/usr/local/bin/R' >> /etc/rstudio/rserver.conf \
+  && echo 'lock-type=advisory' >> /etc/rstudio/file-locks
 
-RUN echo 'if(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { options(httr_oob_default = TRUE) }' >> /usr/local/lib/R/etc/Rprofile.site \
- && echo "PATH=${PATH}" >> /usr/local/lib/R/etc/Renviron \
- && echo 'rsession-which-r=/usr/local/bin/R' >> /etc/rstudio/rserver.conf \
- && echo 'lock-type=advisory' >> /etc/rstudio/file-locks
-
-# Configura sistema s6 para inicialização do rstudio-server com o container (adaptado do projeto Rocker)
+# Configura sistema s6 para inicialização do rstudio-server com o container
 RUN git config --system credential.helper 'cache --timeout=3600' \
  && git config --system push.default simple \
  && wget -P /tmp/ https://github.com/just-containers/s6-overlay/releases/download/v1.21.7.0/s6-overlay-amd64.tar.gz \
- && tar xzf /tmp/s6-overlay-amd64.tar.gz -C
-
-# Configurações do serviço rstudio-server
-RUN mkdir -p /etc/services.d/rstudio \
- && echo -e "#!/usr/bin/with-contenv bash \
-          \n## load /etc/environment vars first: \
-  		  \n for line in $( cat /etc/environment ) ; do export $line ; done \
-          \n exec /usr/lib/rstudio-server/bin/rserver --server-daemonize 0" \
-          > /etc/services.d/rstudio/run \
- && echo -e "#!/bin/bash \
-          \n rstudio-server stop" \
-          > /etc/services.d/rstudio/finish \
- && mkdir -p /home/rstudio/.rstudio/monitored/user-settings \ 
- && echo -e "alwaysSaveHistory='0' \
-          \nloadRData='0' \
-          \nsaveAction='0'" \
-          > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
+ && tar xzf /tmp/s6-overlay-amd64.tar.gz -C / \
+ && mkdir -p /etc/services.d/rstudio \
+ && printf "#!/usr/bin/with-contenv bash \
+           \n## load /etc/environment vars first: \
+  		   \n for line in $( cat /etc/environment ) ; do export $line ; done \
+           \n exec /usr/lib/rstudio-server/bin/rserver --server-daemonize 0" \
+           > /etc/services.d/rstudio/run \
+ && printf "#!/bin/bash \
+           \n rstudio-server stop" \
+           > /etc/services.d/rstudio/finish \
+ && mkdir -p /home/rstudio/.rstudio/monitored/user-settings \
+ && printf "alwaysSaveHistory='0' \
+           \nloadRData='0' \
+           \nsaveAction='0'" \
+           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
  && chown -R rstudio:rstudio /home/rstudio/.rstudio
 
-# Start-up do rstudio-server
 CMD ["/init"]
