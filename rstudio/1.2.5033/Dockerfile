@@ -46,8 +46,9 @@ RUN git config --system credential.helper 'cache --timeout=3600' \
   && git config --system push.default simple \
   && wget -P /tmp/ https://github.com/just-containers/s6-overlay/releases/download/v1.21.7.0/s6-overlay-amd64.tar.gz \
   && tar xzf /tmp/s6-overlay-amd64.tar.gz -C / \
-  && mkdir -p /etc/services.d/rstudio \
-  && echo '#!/usr/bin/with-contenv bash \
+  && mkdir -p /etc/services.d/rstudio 
+
+RUN echo '#!/usr/bin/with-contenv bash \
           \n## load /etc/environment vars first: \
   		  \n for line in $( cat /etc/environment ) ; do export $line ; done \
           \n exec /usr/lib/rstudio-server/bin/rserver --server-daemonize 0' \
