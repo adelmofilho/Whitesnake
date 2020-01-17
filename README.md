@@ -1,4 +1,4 @@
-<p align="center"><img src="https://vignette.wikia.nocookie.net/jjba/images/d/d0/Whitesnake_ASB.jpg/revision/latest/top-crop/width/220/height/220?cb=20151109102630" align="center" height=140/>
+<p align="center"><img src="https://vignette.wikia.nocookie.net/jjba/images/d/d0/Whitesnake_ASB.jpg/revision/latest/top-crop/width/220/height/220?cb=20151109102630" align="center" height=220/>
 </p>
 
 <h2 align="center">Whitesnake</h2>
