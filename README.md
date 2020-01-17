@@ -8,7 +8,6 @@
 <a href="https://www.gnu.org/licenses/gpl-3.0"><img alt="License" src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
 <a href="https://www.codacy.com/manual/adelmofilho/Whitesnake?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adelmofilho/Whitesnake&amp;utm_campaign=Badge_Grade"><img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/b3791d03b8354eb58e052b0db9862167"></a>
 
-
 <br>
 
 ## Descrição
@@ -34,7 +33,7 @@ As imagems `r-base` e `rstudio` foram criadas com objetivo de serem utilizadas p
 
 Em ambos os casos, o uso do pacote [`renv`](https://rstudio.github.io/renv/articles/renv.html) foi associado para garantir a consistência nos pacotes R.
 
-**R-Studio**
+### R-Studio
 
 A imagem `rstudio` inicializa com o serviço do [rstudio-server](https://rstudio.com/products/rstudio/) exposto na porta 8787 de seu localhost.
 
@@ -44,8 +43,11 @@ Finalmente, para não será necessário instalar todos os pacotes R sempre que o
 
 Todas os pontos levantados, resultam na seguinte chamada da imagem `rstudio`.
 
-```
-docker run -d --rm -p 8787:8787 -v /path/projeto:/home/rstudio -v /home/${USER}/.local/share/renv:/home/rstudio/.local/share/renv adelmofilho/rstudio:1.2.5033
+```sh
+docker run -d --rm -p 8787:8787 \
+-v /path/projeto:/home/rstudio \
+-v /home/${USER}/.local/share/renv:/home/rstudio/.local/share/renv \
+adelmofilho/rstudio:1.2.5033
 ```
 
 Na chamada acima, `/path/projeto` corresponde ao caminho para o diretório do seu projeto.
