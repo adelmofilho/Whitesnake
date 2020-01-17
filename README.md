@@ -34,7 +34,7 @@ As imagems `r-base` e `rstudio` foram criadas com objetivo de serem utilizadas p
 
 Em ambos os casos, o uso do pacote [`renv`](https://rstudio.github.io/renv/articles/renv.html) foi associado para garantir a consistência nos pacotes R.
 
-**R-studio**
+**R-Studio**
 
 A imagem `rstudio` inicializa com o serviço do [rstudio-server](https://rstudio.com/products/rstudio/) exposto na porta 8787 de seu localhost.
 
@@ -50,10 +50,10 @@ docker run -d --rm -p 8787:8787 -v /path/projeto:/home/rstudio -v /home/${USER}/
 
 Na chamada acima, `/path/projeto` corresponde ao caminho para o diretório do seu projeto.
 
-Ao acessar `localhost:8787` em seu navegador e entrar com login e senha no rstudio-server, entre no console com o comando `renv::init()`. Com isso, seu diretório passará a ser considerado um projeto R e os pacotes instalados terão seu cache armazenado no `~/.local/share/renv`.
+Ao acessar `localhost:8787` em seu navegador e entrar com login e senha no rstudio-server, execute no console o comando `renv::init()`. Com isso seu diretório passará a ser considerado um projeto R e os pacotes instalados terão seu cache armazenado no `~/.local/share/renv`.
 
 <br>
 
 ## Licença
 
-Os Dockerfiles neste repositório estão sob licença GPL 3.
+Os arquivos neste repositório estão sob licença GPL 3.
