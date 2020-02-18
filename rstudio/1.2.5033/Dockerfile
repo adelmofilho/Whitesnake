@@ -26,6 +26,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libclang-dev=1:6.0-41~exp5~ubuntu1 \
     psmisc=23.1-1ubuntu0.1 \
     sudo=1.8.21p2-3ubuntu1.1 \
+    qpdf=8.0.2-3 \
 && rm -rf /var/lib/apt/lists/*
 
 # Instala rstudio-server
@@ -59,5 +60,8 @@ RUN git config --system credential.helper 'cache --timeout=3600' \
           \nsaveAction='0'" \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
  && chown -R rstudio:rstudio /home/rstudio/.rstudio
+
+WORKDIR /home/project
+RUN chmod 777 /home/project
 
 CMD ["/init"]

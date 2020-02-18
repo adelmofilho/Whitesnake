@@ -5,8 +5,10 @@
 
 <p align="center">
 <a href="http://www.repostatus.org/#active"><img alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed." src="https://www.repostatus.org/badges/latest/active.svg"></a>
-<a href="https://www.gnu.org/licenses/gpl-3.0"><img alt="License" src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
 <a href="https://www.codacy.com/manual/adelmofilho/Whitesnake?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=adelmofilho/Whitesnake&amp;utm_campaign=Badge_Grade"><img alt="Codacy Badge" src="https://api.codacy.com/project/badge/Grade/b3791d03b8354eb58e052b0db9862167"></a>
+<a href="https://www.gnu.org/licenses/gpl-3.0"><img alt="License" src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
+<a href="https://doi.org/10.5281/zenodo.3610719"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3610719.svg" alt="DOI"></a>
+</p>
 
 <br>
 
