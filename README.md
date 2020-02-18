@@ -47,7 +47,7 @@ Todas os pontos levantados, resultam na seguinte chamada da imagem `rstudio`.
 
 ```sh
 docker run -d --rm -p 8787:8787 \
--v /path/projeto:/home/rstudio \
+-v /path/projeto:/home/project \
 -v /home/${USER}/.local/share/renv:/home/rstudio/.local/share/renv \
 adelmofilho/rstudio:1.2.5033
 ```

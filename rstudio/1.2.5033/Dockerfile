@@ -24,8 +24,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libapparmor1=2.12-4ubuntu5.1 \ 
     libedit2=3.1-20170329-1 \
     libclang-dev=1:6.0-41~exp5~ubuntu1 \
+    sudo=1.8.21p2-3ubuntu1.2 \
     psmisc=23.1-1ubuntu0.1 \
-    sudo=1.8.21p2-3ubuntu1.1 \
     qpdf=8.0.2-3 \
 && rm -rf /var/lib/apt/lists/*
 
@@ -61,7 +61,6 @@ RUN git config --system credential.helper 'cache --timeout=3600' \
           > /home/rstudio/.rstudio/monitored/user-settings/user-settings \
  && chown -R rstudio:rstudio /home/rstudio/.rstudio
 
-WORKDIR /home/project
-RUN chmod 777 /home/project
+RUN chmod 777 /home
 
 CMD ["/init"]
