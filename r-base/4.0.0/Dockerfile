@@ -35,6 +35,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive=2017.20180305-1 \
     texlive-fonts-extra=2017.20180305-2 \
     vim=2:8.0.1453-1ubuntu1.1 \
+    libv8-dev \
     wget=1.19.4-1ubuntu2.2 \
     xvfb=2:1.19.6-1ubuntu4.3 \
 && rm -rf /var/lib/apt/lists/*
@@ -47,11 +48,11 @@ ENV LC_ALL pt_BR.UTF-8
 
 # Instalar R
 
-RUN wget https://cran.rstudio.com/src/base/R-3/R-3.6.2.tar.gz && \
-    tar zxvf R-3.6.2.tar.gz && \
-    rm R-3.6.2.tar.gz
+RUN wget https://cran.r-project.org/src/base/R-4/R-4.0.0.tar.gz && \
+    tar zxvf R-4.0.0.tar.gz && \
+    rm R-4.0.0.tar.gz
 
-WORKDIR /R-3.6.2
+WORKDIR /R-4.0.0
 
 RUN ./configure --with-cairo --with-jpeglib --enable-R-shlib --with-blas --with-lapack && \ 
     make && \
