@@ -19,14 +19,14 @@ RUN useradd rstudio \
 
 # Instalar dependências
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gdebi-core=0.9.5.7+nmu2 \ 
-    lsb-release=9.20170808ubuntu1 \
-    libapparmor1=2.12-4ubuntu5.1 \ 
-    libedit2=3.1-20170329-1 \
-    libclang-dev=1:6.0-41~exp5~ubuntu1 \
-    sudo=1.8.21p2-3ubuntu1.2 \
-    psmisc=23.1-1ubuntu0.1 \
-    qpdf=8.0.2-3 \
+    gdebi-core \ 
+    lsb-release \
+    libapparmor1 \ 
+    libedit2 \
+    libclang-dev \
+    sudo \
+    psmisc \
+    qpdf \
 && rm -rf /var/lib/apt/lists/*
 
 # Instala rstudio-server

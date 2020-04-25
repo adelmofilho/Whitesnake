@@ -8,35 +8,43 @@ LABEL org.label-schema.license="GPL-3.0" \
 # Assumir defaults nas instalações 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Parâmetros da instalação
+
+ENV R_VERSION_MAJOR=3
+ENV R_VERSION_MINOR=6
+ENV R_VERSION_PATCH=2
+ENV CONFIGURE_OPTIONS="--with-cairo --with-jpeglib --enable-R-shlib --with-blas --with-lapack"
+ENV RENV_VERSION 0.9.3
+
 # Instalar dependências
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils=1.6.12 \
-    gfortran=4:7.4.0-1ubuntu2.3 \
-    git=1:2.17.1-1ubuntu0.5 \
-    g++=4:7.4.0-1ubuntu2.3 \
-    libreadline-dev=7.0-3 \
-    libx11-dev=2:1.6.4-3ubuntu0.2 \
-    libxt-dev=1:1.1.5-1 \
-    libpng-dev=1.6.34-1ubuntu0.18.04.2 \
-    libjpeg-dev=8c-2ubuntu8 \
-    libcairo2-dev=1.15.10-2ubuntu0.1 \   
-    libcurl4-openssl-dev=7.58.0-2ubuntu3.8 \
-    libssl-dev=1.1.1-1ubuntu2.1~18.04.5 \ 
-    libxml2-dev=2.9.4+dfsg1-6.1ubuntu1.2 \
-    libudunits2-dev=2.2.26-1 \
-    libgdal-dev=2.2.3+dfsg-2 \
-    libbz2-dev=1.0.6-8.1ubuntu0.2 \
-    libzstd-dev=1.3.3+dfsg-2ubuntu1.1 \
-    liblzma-dev=5.2.2-1.3 \
-    locales=2.27-3ubuntu1 \
-    openjdk-8-jdk=8u232-b09-0ubuntu1~18.04.1 \
-    screen=4.6.2-1ubuntu1 \
-    texinfo=6.5.0.dfsg.1-2 \
-    texlive=2017.20180305-1 \
-    texlive-fonts-extra=2017.20180305-2 \
-    vim=2:8.0.1453-1ubuntu1.1 \
-    wget=1.19.4-1ubuntu2.2 \
-    xvfb=2:1.19.6-1ubuntu4.3 \
+    apt-utils\
+    gfortran \
+    git \
+    g++ \
+    libreadline-dev \
+    libx11-dev \
+    libxt-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libcairo2-dev \   
+    libcurl4-openssl-dev \
+    libssl-dev \ 
+    libxml2-dev \
+    libudunits2-dev \
+    libgdal-dev \
+    libbz2-dev \
+    libzstd-dev \
+    liblzma-dev \
+    locales \
+    openjdk-8-jdk \
+    screen \
+    texinfo \
+    texlive \
+    texlive-fonts-extra \
+    vim \
+    wget \
+    xvfb \
 && rm -rf /var/lib/apt/lists/*
 
 # Ajuste o locale
@@ -47,17 +55,16 @@ ENV LC_ALL pt_BR.UTF-8
 
 # Instalar R
 
-RUN wget https://cran.rstudio.com/src/base/R-3/R-3.6.2.tar.gz && \
-    tar zxvf R-3.6.2.tar.gz && \
-    rm R-3.6.2.tar.gz
+RUN wget https://cran.rstudio.com/src/base/R-${R_VERSION_MAJOR}/R-${R_VERSION_MAJOR}.${R_VERSION_MINOR}.${R_VERSION_PATCH}.tar.gz && \
+    tar zxvf R-${R_VERSION_MAJOR}.${R_VERSION_MINOR}.${R_VERSION_PATCH}.tar.gz && \
+    rm R-${R_VERSION_MAJOR}.${R_VERSION_MINOR}.${R_VERSION_PATCH}.tar.gz
 
-WORKDIR /R-3.6.2
+WORKDIR /R-${R_VERSION_MAJOR}.${R_VERSION_MINOR}.${R_VERSION_PATCH}
 
-RUN ./configure --with-cairo --with-jpeglib --enable-R-shlib --with-blas --with-lapack && \ 
+RUN ./configure ${CONFIGURE_OPTIONS} && \ 
     make && \
     make install
 
 # Instalar renv
-ENV RENV_VERSION 0.9.2-20
 RUN R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
 RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"

@@ -10,9 +10,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Parâmetros da instalação
 
-ENV R_VERSION_MAJOR=4
-ENV R_VERSION_MINOR=0
-ENV R_VERSION_PATCH=0
+ENV R_VERSION_MAJOR=3
+ENV R_VERSION_MINOR=6
+ENV R_VERSION_PATCH=3
 ENV CONFIGURE_OPTIONS="--with-cairo --with-jpeglib --enable-R-shlib --with-blas --with-lapack"
 ENV RENV_VERSION 0.9.3
 
@@ -36,7 +36,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libbz2-dev \
     libzstd-dev \
     liblzma-dev \
-    libpcre2-dev \
     locales \
     openjdk-8-jdk \
     screen \
